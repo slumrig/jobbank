@@ -16,10 +16,10 @@
     ],
     "require": {
         "composer/installers": "^2.0",
-        "drupal/core-composer-scaffold": "^10.0",
-        "drupal/core-project-message": "^10.0",
-        "drupal/core-recommended": "^10.0",
-        "drush/drush": "^11.4"
+        "drupal/core-composer-scaffold": "10.2.2",
+        "drupal/core-project-message": "10.2.2",
+        "drupal/core-recommended": "10.2.2",
+        "drupal/csv_importer": "^1.16"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -92,5 +92,8 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "require-dev": {
+        "drush/drush": "~12.0"
     }
 }
