@@ -1,0 +1,23 @@
+uuid: 40a93f34-33c1-4b41-b2f5-a90c896bb848
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_url_id
+    - node.type.job_posting
+id: node.job_posting.field_url_id
+field_name: field_url_id
+entity_type: node
+bundle: job_posting
+label: 'URL ID'
+description: 'The job posting identifier in the URL for publicly accessible version of the job posting.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

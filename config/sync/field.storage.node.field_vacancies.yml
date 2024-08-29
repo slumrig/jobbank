@@ -1,0 +1,20 @@
+uuid: ad1cd6e6-8afe-4592-a4df-adec955bb606
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_vacancies
+field_name: field_vacancies
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
