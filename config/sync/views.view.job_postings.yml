@@ -945,23 +945,7 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: second
+      sorts: {  }
       arguments:
         field_employer_email_value:
           id: field_employer_email_value
@@ -1038,57 +1022,13 @@ display:
           expose:
             operator_id: field_employer_email_value_op
             label: 'Employer Email (field_employer_email)'
-            description: 'Search for job postings by email.'
-            use_operator: true
+            description: ''
+            use_operator: false
             operator: field_employer_email_value_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: field_employer_email_value
             required: false
-            remember: true
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: string
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: title_op
-            label: Title
-            description: ''
-            use_operator: true
-            operator: title_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: title
-            required: false
             remember: false
             multiple: false
             remember_roles:
@@ -1109,49 +1049,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_lmia_status_value:
-          id: field_lmia_status_value
-          table: node__field_lmia_status
-          field: field_lmia_status_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: list_field
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_lmia_status_value_op
-            label: 'LMIA Status (field_lmia_status)'
-            description: ''
-            use_operator: false
-            operator: field_lmia_status_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: field_lmia_status_value
-            required: false
-            remember: true
-            multiple: true
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
       filter_groups:
         operator: AND
         groups:

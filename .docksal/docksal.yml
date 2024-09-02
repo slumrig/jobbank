@@ -1,1 +1,8 @@
 version: "3.9"
+
+services:
+  # Solr
+  solr:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: solr
