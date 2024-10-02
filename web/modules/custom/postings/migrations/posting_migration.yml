@@ -1,0 +1,133 @@
+id: posting_migration
+label: 'Migrate job postings to site'
+source:
+  plugin: url
+  urls:
+    callback: postings_posting_urls
+  data_fetcher_plugin: http
+  data_parser_plugin: custom_html5
+#  request_options:
+#    http_errors: false
+  item_selector: '/'
+  ids:
+    posting_id:
+      type: string
+  fields:
+    - name: current_url
+      label: 'Current URL'
+    - name: posting_id
+      label: 'Posting ID'
+    - name: title
+      label: 'Title'
+      selector: '//span[@property="title"]/text()'
+    - name: job_bank_id
+      label: 'Job Bank Id'
+      selector: '//span[@class="source-image"]/following-sibling::span/following-sibling::span/text()'
+    - name: posting_date
+      label: 'Posting Date'
+      selector: '//span[@property="datePosted"]/text()'
+    - name: vacancies
+      label: 'Vacancies'
+      selector: '//span[@class="fa fa-user"]/following-sibling::span/following-sibling::span/text()'
+    - name: street
+      label: 'Street'
+      selector: '//span[@property="streetAddress"]/text()'
+    - name: locality
+      label: 'Locality'
+      selector: '//span[@property="addressLocality"]/text()'
+    - name: region
+      label: 'Region'
+      selector: '//span[@property="addressRegion"]/text()'
+    - name: postal
+      label: 'Postal'
+      selector: '//span[@property="postalCode"]/text()'
+    - name: employment_type
+      label: 'Employment Type'
+      selector: '//span[@property="employmentType"]'
+    - name: employer_strong
+      label: 'Employer Strong'
+      selector: '//span[@property="name"]/strong/text()'
+    - name: employer_anchor
+      label: 'Employer Anchor'
+      selector: '//span[@property="name"]/a/text()'
+    - name: employer_url
+      label: 'Employer URL'
+      selector: '//span[@property="name"]/a/@href'
+    - name: hours
+      label: 'Hours'
+      selector: '//span[@property="workHours"]/text()'
+    - name: rate_of_pay
+      label: 'Rate of Pay'
+      selector: '//span[@property="baseSalary"]'
+    - name: body
+      label: 'Page body'
+      selector: '//body'
+    - name: location
+      label: 'Job Location'
+      selector: '(//span[contains(@class, "fa-icon-desc")])[1]/following-sibling::span/following-sibling::span/text()'
+    - name: lmia_applied
+      label: 'LMIA Applied'
+      selector: '//span[@class="tfw-icon lmia-icon-pending"]'
+    - name: lmia_approved
+      label: 'LMIA Approved'
+      selector: '//span[@class="tfw-icon lmia-icon-approved"]'
+    - name: job_id
+      label: 'Job ID - URL'
+      selector: '//a[@class="favourite signInUserAccount"]/@data-jobid'
+process:
+  title: title
+  field_job_bank_number:
+    plugin: str_replace
+    source: job_bank_id
+    search: '#'
+    replace: ''
+  field_posting_date:
+    - plugin: str_replace
+      source: posting_date
+      search: 'Posted on '
+      replace: ''
+    - plugin: callback
+      callable: trim
+  field_vacancies:
+    plugin: str_replace
+    source: vacancies
+    search: 'vacancies'
+    replace: ''
+  field_employer_address:
+    - plugin: callback
+      callable: array_filter
+      source:
+        - street
+        - locality
+        - region
+        - postal
+    - plugin: concat
+      delimiter: ', '
+  field_employment_type:
+    plugin: get_employment_type
+    source: employment_type
+  field_employer_name:
+    plugin: if_condition
+    source: employer_anchor
+    condition: not:empty
+    else_get: employer_strong
+  field_employer_url: employer_url
+  field_rate_of_hours: hours
+  field_rate_of_pay:
+    plugin: get_rate_of_pay
+    source: rate_of_pay
+  field_job_description:
+    plugin: get_description
+    source: body
+  field_location: location
+  field_lmia_status:
+    plugin: get_lmia_status
+    source: body
+  field_employer_email:
+    plugin: get_email
+    source: job_id
+  field_posting_url: current_url
+  field_expired: expired
+destination:
+  plugin: entity:node
+  default_bundle: job_posting

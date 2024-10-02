@@ -1,4 +1,4 @@
-uuid: 8563bd59-c91e-4211-8550-e702a19a1db2
+uuid: f0b5557e-2500-49dc-b984-bb301a37f9c6
 langcode: en
 status: true
 dependencies: {  }
@@ -8,3 +8,4 @@ name: Tags
 vid: tags
 description: 'Use tags to group articles on similar topics into categories.'
 weight: 0
+new_revision: false

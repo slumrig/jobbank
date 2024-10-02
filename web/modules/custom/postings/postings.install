@@ -9,6 +9,37 @@
  * Implements hook_install().
  */
 function postings_install() {
+
+  if (!\Drupal::database()->schema()->tableExists('posting_urls')) {
+    $schema = [
+      'storage' => [
+        'posting_urls' => [
+          'fields' => [
+            'id' => [
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'description' => 'Posting URL ID.',
+            ],
+            'url' => [
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+              'description' => 'Posting URL.',
+            ],
+          ],
+          'primary key' => ['id'],
+          'unique keys' => [
+            'url' => ['url'],
+          ],
+          'indexes' => [],
+          'foreign keys' => [],
+        ],
+      ],
+    ];
+    \Drupal::database()->schema()->createTable('posting_urls', $schema['storage']['posting_urls']);
+  }
   \Drupal::messenger()->addStatus(__FUNCTION__);
 }
 

@@ -1,0 +1,23 @@
+uuid: 0e396098-8b96-4a38-b642-2731b4e9b768
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lmia_status
+    - node.type.job_posting
+  module:
+    - options
+id: node.job_posting.field_lmia_status
+field_name: field_lmia_status
+entity_type: node
+bundle: job_posting
+label: 'LMIA Status'
+description: 'The LMIA status of the job posting if exists.'
+required: true
+translatable: false
+default_value:
+  -
+    value: none
+default_value_callback: ''
+settings: {  }
+field_type: list_string

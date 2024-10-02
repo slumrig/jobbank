@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+## Toggles a given PHP extension (most commonly xdebug).
+##
+## Usage: fin php/ext xhprof on|off
+#: exec_target = cli
+
+usage() {
+  echo "Usage:"
+  echo "fin php-ext <extension name> on|off"
+}
+
+toggle_on() {
+  # Uncomment the extension.
+  sudo su -c "sed -ri 's/^[#;]((zend_)?extension)/\1/' ${extensionPath}"
+  echo "${extension} on"
+}
+
+toggle_off() {
+  # Comment out the extension.
+  sudo su -c "sed -ri 's/^((zend_)?extension)/#\1/' ${extensionPath}"
+  echo "${extension} off"
+}
+
+restart_php_fpm() {
+  sudo supervisorctl restart php-fpm
+}
+
+find_extension() {
+  PHP=$(which php 2>/dev/null)
+  if [[ -z ${PHP} ]]; then
+    echo 1>&2 "PHP not found"
+    exit
+  fi
+  extensionPath=$(php --ini | grep "${extension}" | tr -d ",")
+  if [[ -z ${extensionPath} ]]; then
+    echo 1>&2 "Invalid extension: ${extension}"
+    exit 1
+  fi
+}
+
+extension_status() {
+  status=$(grep "^\(zend_\)\?extension" $extensionPath || echo "")
+  if [[ -z ${status} ]]; then
+    echo "off"
+  else
+    echo "on"
+  fi
+}
+
+# main
+extension=${1}
+find_extension
+
+if [[ -z ${2} ]]; then
+  echo $(extension_status)
+  exit 0
+elif [[ "${2}" == "on" ]]; then
+  toggle_on
+elif [[ "${2}" == "off" ]]; then
+  toggle_off
+else
+  echo "Unknown option: ${2}"
+  exit 1
+fi
+
+restart_php_fpm

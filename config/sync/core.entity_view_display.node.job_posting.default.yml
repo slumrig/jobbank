@@ -9,15 +9,18 @@ dependencies:
     - field.field.node.job_posting.field_employer_url
     - field.field.node.job_posting.field_employment_type
     - field.field.node.job_posting.field_job_bank_number
+    - field.field.node.job_posting.field_job_description
     - field.field.node.job_posting.field_lmia_status
+    - field.field.node.job_posting.field_location
     - field.field.node.job_posting.field_noc
     - field.field.node.job_posting.field_posting_date
+    - field.field.node.job_posting.field_posting_url
     - field.field.node.job_posting.field_rate_of_hours
     - field.field.node.job_posting.field_rate_of_pay
-    - field.field.node.job_posting.field_url_id
     - field.field.node.job_posting.field_vacancies
     - node.type.job_posting
   module:
+    - json_field
     - link
     - options
     - user
@@ -32,14 +35,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 10
+    weight: 9
     region: content
   field_employer_email:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   field_employer_name:
     type: string
@@ -47,7 +50,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_employer_url:
     type: link
@@ -59,7 +62,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 5
+    weight: 4
     region: content
   field_employment_type:
     type: string
@@ -67,22 +70,38 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_job_bank_number:
-    type: string
+    type: number_integer
     label: above
     settings:
-      link_to_entity: false
+      thousand_separator: ''
+      prefix_suffix: true
     third_party_settings: {  }
-    weight: 11
+    weight: 14
+    region: content
+  field_job_description:
+    type: json
+    label: above
+    settings:
+      attach_library: true
+    third_party_settings: {  }
+    weight: 10
     region: content
   field_lmia_status:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 13
+    weight: 11
+    region: content
+  field_location:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 15
     region: content
   field_noc:
     type: string
@@ -98,7 +117,19 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 6
+    weight: 5
+    region: content
+  field_posting_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 13
     region: content
   field_rate_of_hours:
     type: string
@@ -106,7 +137,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 7
     region: content
   field_rate_of_pay:
     type: string
@@ -114,16 +145,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 7
-    region: content
-  field_url_id:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 1
+    weight: 6
     region: content
   field_vacancies:
     type: number_integer
@@ -132,7 +154,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 9
+    weight: 8
     region: content
   links:
     settings: {  }

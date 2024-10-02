@@ -1,4 +1,4 @@
-uuid: 3e18885e-7e70-46a2-8e37-d776623228b5
+uuid: 60d32b10-5a03-464b-918a-8022e54eec74
 langcode: en
 status: true
 dependencies:
@@ -440,6 +440,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 50
           total_pages: null
           id: 0

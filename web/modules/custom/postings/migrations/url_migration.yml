@@ -1,0 +1,13 @@
+id: url_migration
+label: 'Get job posting urls'
+source:
+  plugin: url_source_plugin
+  ids:
+    id:
+      type: int
+process:
+  field_url: url
+  title: id
+destination:
+  plugin: entity:node
+  default_bundle: job_posting_url

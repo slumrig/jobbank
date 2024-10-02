@@ -1,0 +1,35 @@
+uuid: a1a10216-58fb-4886-a900-a6741adac40a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.job_posting_url.field_url
+    - node.type.job_posting_url
+  module:
+    - link
+    - user
+id: node.job_posting_url.default
+targetEntityType: node
+bundle: job_posting_url
+mode: default
+content:
+  field_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

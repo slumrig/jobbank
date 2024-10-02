@@ -1,0 +1,30 @@
+uuid: fc44e53e-8500-4d5c-bc70-2f69ea9da8fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_location
+field_name: field_location
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: on_site
+      label: 'On site'
+    -
+      value: remote
+      label: Remote
+    -
+      value: hybrid
+      label: Hybrid
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

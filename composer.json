@@ -15,14 +15,26 @@
         }
     ],
     "require": {
+        "ext-dom": "*",
         "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.5",
         "drupal/core-composer-scaffold": "10.3.2",
         "drupal/core-project-message": "10.3.2",
         "drupal/core-recommended": "10.3.2",
         "drupal/csv_importer": "^1.16",
+        "drupal/devel": "^5.3",
+        "drupal/hook_event_dispatcher": "^4.0",
+        "drupal/json_field": "^1.3",
+        "drupal/migrate_conditions": "^2.2",
+        "drupal/migrate_devel": "^3.0",
+        "drupal/migrate_file": "^2.1",
+        "drupal/migrate_plus": "^6.0",
+        "drupal/migrate_source_csv": "^3.6",
+        "drupal/migrate_source_html": "^1.0",
         "drupal/pathauto": "^1.13",
-        "drupal/search_api_solr": "^4.3"
+        "drupal/search_api_solr": "^4.3",
+        "drupal/views_bulk_operations": "^4.2"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -35,7 +47,8 @@
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "phpstan/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cweagans/composer-patches": true
         },
         "sort-packages": true
     },
@@ -94,6 +107,11 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
+        },
+        "patches": {
+            "drupal/migrate_plus": {
+                "3040427 - Allow plugin to pull urls source": "https://www.drupal.org/files/issues/2023-02-15/3040427-42-migrate_plus_multiple_urls.patch"
+            }
         }
     },
     "require-dev": {

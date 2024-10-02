@@ -1,4 +1,4 @@
-uuid: 25f219bf-5a7c-4489-8ebf-0a93c6070d8d
+uuid: 11392550-b4a3-4baa-89c0-dde01047532e
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - file
     - user
 _core:
-  default_config_hash: ja1IXL3-eSj1lJFQKxyY6-b0yfBsQzvngMbe0J2F22w
+  default_config_hash: EmxYEy0jK7wy0LbjQukSaI5A_3klI0Fnl1lFj8qBWCw
 id: files
 label: Files
 module: file
@@ -521,6 +521,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 50
           total_pages: 0
           id: 0
@@ -1056,6 +1057,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 10
           total_pages: 0
           id: 0

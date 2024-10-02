@@ -1,4 +1,4 @@
-uuid: 87be2cd5-fb6f-4f21-bba4-da2aeef716a9
+uuid: 5de78cd0-db6e-44f8-baa9-c8d4dd9b6f3f
 langcode: en
 status: true
 dependencies:
@@ -9,7 +9,7 @@ dependencies:
     - taxonomy
     - user
 _core:
-  default_config_hash: z9csC6m3M65M2JczdNul_lMUrVg8ZO66pbSq8jPCBKs
+  default_config_hash: YKgw0f77GEmCu6_6Om9Mbig0mON9JdfVuMxTtd0WQaI
 id: taxonomy_term
 label: 'Taxonomy term'
 module: taxonomy
@@ -29,6 +29,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 10
           total_pages: 0
           id: 0
