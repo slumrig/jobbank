@@ -14,7 +14,7 @@ use GuzzleHttp\Exception\GuzzleException;
  */
 class GetPostingURLs extends SourcePluginBase {
 
-  private const PAGES = 2;
+  private const PAGES = 4000;
 
   /**
    * {@inheritdoc}
@@ -40,7 +40,7 @@ class GetPostingURLs extends SourcePluginBase {
     $client = \Drupal::httpClient();
     $urls = [];
     for ($i = 0; $i < self::PAGES; $i++) {
-      $page = ($i < 1) ? '?page=' . $i . '&' : '?';
+      $page = ($i < 1) ? '?' : '?page=' . $i . '&';
       $url = 'https://www.jobbank.gc.ca/jobsearch/jobsearch' . $page . 'sort=D&fsrc=16';
       try {
         $promise = $client->getAsync($url);
@@ -52,6 +52,10 @@ class GetPostingURLs extends SourcePluginBase {
       $document = Html::load($response->getBody());
       $dom = new DOMXPath($document);
       $node_list = $dom->query("//a[@class='resultJobItem']/@href");
+      if (count($node_list) < 1) { // no results mean its reached a page with no postings
+        echo $i;
+        break;
+      }
       for ($j = 0; $j < $node_list->length; $j++) {
         $parts = explode(';', $node_list[$j]->value);
         $matches = [];

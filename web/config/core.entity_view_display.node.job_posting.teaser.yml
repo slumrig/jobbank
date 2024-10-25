@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.job_posting.field_posting_url
     - field.field.node.job_posting.field_rate_of_hours
     - field.field.node.job_posting.field_rate_of_pay
+    - field.field.node.job_posting.field_raw
     - field.field.node.job_posting.field_vacancies
     - node.type.job_posting
   module:
@@ -49,6 +50,7 @@ hidden:
   field_posting_url: true
   field_rate_of_hours: true
   field_rate_of_pay: true
+  field_raw: true
   field_vacancies: true
   langcode: true
   search_api_excerpt: true

@@ -11,7 +11,7 @@ entity_type: node
 bundle: job_posting
 label: 'Rate of Pay'
 description: 'The rate of pay - monetary amount in dollars then weekly, daily, monthly etc.'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

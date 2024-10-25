@@ -11,7 +11,7 @@ entity_type: node
 bundle: job_posting
 label: Vacancies
 description: 'The number of vacancies for the posted position.'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
