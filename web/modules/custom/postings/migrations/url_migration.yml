@@ -3,11 +3,11 @@ label: 'Get job posting urls'
 source:
   plugin: url_source_plugin
   ids:
-    id:
-      type: int
+    posting_id:
+      type: string
 process:
-  field_url: url
-  title: id
+  field_posting_url: url
+  title: url
 destination:
   plugin: entity:node
-  default_bundle: job_posting_url
+  default_bundle: job_posting

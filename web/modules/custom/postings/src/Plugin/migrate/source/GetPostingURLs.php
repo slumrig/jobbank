@@ -14,9 +14,7 @@ use GuzzleHttp\Exception\GuzzleException;
  */
 class GetPostingURLs extends SourcePluginBase {
 
-  private const PAGES = 4044;
-
-  private array $urls = [];
+  private const PAGES = 2;
 
   /**
    * {@inheritdoc}
@@ -40,8 +38,10 @@ class GetPostingURLs extends SourcePluginBase {
    */
   protected function initializeIterator(): \Iterator|\ArrayIterator {
     $client = \Drupal::httpClient();
-    for ($i = 1; $i < self::PAGES; $i++) {
-      $url = 'https://www.jobbank.gc.ca/jobsearch/jobsearch?page=' . $i . '&sort=D&fsrc=16';
+    $urls = [];
+    for ($i = 0; $i < self::PAGES; $i++) {
+      $page = ($i < 1) ? '?page=' . $i . '&' : '?';
+      $url = 'https://www.jobbank.gc.ca/jobsearch/jobsearch' . $page . 'sort=D&fsrc=16';
       try {
         $promise = $client->getAsync($url);
         $response = $promise->wait();
@@ -56,13 +56,13 @@ class GetPostingURLs extends SourcePluginBase {
         $parts = explode(';', $node_list[$j]->value);
         $matches = [];
         preg_match('#(\d+)$#', $parts[0], $matches);
-        $this->urls[] = [
+        $urls[] = [
           'id' => $matches[0],
           'url' => 'https://www.jobbank.gc.ca' . $parts[0]
         ];
       }
     }
-    return (new \ArrayObject($this->urls))->getIterator();
+    return new \ArrayIterator($urls);
   }
 
   /**

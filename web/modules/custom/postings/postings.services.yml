@@ -4,7 +4,3 @@ services:
     tags:
       - { name: drush.command }
     arguments: ['@entity_type.manager', '@logger.factory', '@plugin.manager.migration']
-  postings.subscriber.pre_import:
-    class: Drupal\postings\EventSubscriber\PreImportSubscriber
-    tags:
-      - { name: event_subscriber }
