@@ -1,0 +1,19 @@
+uuid: 2d1a832d-7c12-4989-bf7d-c692fc7a2403
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rate_of_pay
+    - node.type.job_posting
+id: node.job_posting.field_rate_of_pay
+field_name: field_rate_of_pay
+entity_type: node
+bundle: job_posting
+label: 'Rate of Pay'
+description: 'The rate of pay - monetary amount in dollars then weekly, daily, monthly etc.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

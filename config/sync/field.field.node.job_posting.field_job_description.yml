@@ -1,0 +1,23 @@
+uuid: 322a9bf9-9714-4a92-b5ea-fbaf29d533c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_description
+    - node.type.job_posting
+  module:
+    - json_field
+id: node.job_posting.field_job_description
+field_name: field_job_description
+entity_type: node
+bundle: job_posting
+label: 'Job Description'
+description: 'JSON holding fields an values from the job posting description section.'
+required: false
+translatable: false
+default_value:
+  -
+    value: '{}'
+default_value_callback: ''
+settings: {  }
+field_type: json_native

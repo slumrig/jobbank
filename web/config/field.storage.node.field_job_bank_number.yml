@@ -1,0 +1,20 @@
+uuid: 04b97329-b0db-4d8f-ad7e-91f95a57eab5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_job_bank_number
+field_name: field_job_bank_number
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

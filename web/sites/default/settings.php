@@ -264,7 +264,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'h9cIln3bR6m_4JQNyWKxm5l0HfY-J_IbBrasJUzORljkQTgFKxlJSN5LH-dlsDfuZsdxX6rPjg';
+$settings['hash_salt'] = 'xEnTpEt2TlLJR-E7DZCXktlUDkBJgFEkpkzXaxQxxJRVO2yw7PcZYtyte5d9Nv-WwWYd1_52WA';
 
 /**
  * Deployment identifier.
@@ -825,4 +825,16 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
-$settings['config_sync_directory'] = 'sites/default/files/config_sjfNGZNSYN7X1y5rt9vTKtf_HNXeny08lyzsjUB5L2is_kRMtSB4mVz57CFc5yGUQvXjXl9N4g/sync';
+$settings['config_sync_directory'] = '../web/config';
+$databases['default']['default'] = array (
+  'database' => 'default',
+  'username' => 'user',
+  'password' => 'user',
+  'prefix' => '',
+  'host' => 'db',
+  'port' => '3306',
+  'isolation_level' => 'READ COMMITTED',
+  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
+  'driver' => 'mysql',
+  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
+);

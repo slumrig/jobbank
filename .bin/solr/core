@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+## Creates the given core.
+##
+## Usage: fin solr/core <core name>
+#: exec_target = solr
+
+if [[ -z ${1} ]]; then
+  echo "Core name must be provided"
+  exit 1
+fi
+
+/opt/solr-8.1.1/bin/solr create -c $1 -d /var/solr/conf

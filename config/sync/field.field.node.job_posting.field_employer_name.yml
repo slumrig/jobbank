@@ -1,0 +1,19 @@
+uuid: 079e91b9-cfac-4a61-abc2-8a7a79211cf3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_employer_name
+    - node.type.job_posting
+id: node.job_posting.field_employer_name
+field_name: field_employer_name
+entity_type: node
+bundle: job_posting
+label: 'Employer Name'
+description: 'The name of the employer.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

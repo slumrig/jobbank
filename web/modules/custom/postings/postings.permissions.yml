@@ -1,0 +1,4 @@
+administer postings configuration:
+  title: 'Administer postings configuration'
+  description: 'Optional description.'
+  restrict access: true

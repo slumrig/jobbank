@@ -1,0 +1,23 @@
+uuid: f2a50591-b7b7-4474-9be7-ae7bbe5050d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_bank_number
+    - node.type.job_posting
+id: node.job_posting.field_job_bank_number
+field_name: field_job_bank_number
+entity_type: node
+bundle: job_posting
+label: 'Job Bank Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

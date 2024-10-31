@@ -1,0 +1,30 @@
+uuid: cdf0ab7b-f920-4786-a9d4-a4724f62f308
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_lmia_status
+field_name: field_lmia_status
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: none
+      label: None
+    -
+      value: applied
+      label: Applied
+    -
+      value: approved
+      label: Approved
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

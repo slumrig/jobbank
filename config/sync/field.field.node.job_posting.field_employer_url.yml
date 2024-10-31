@@ -1,0 +1,23 @@
+uuid: ecaaba3c-5f03-4e61-a097-561af5f41bb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_employer_url
+    - node.type.job_posting
+  module:
+    - link
+id: node.job_posting.field_employer_url
+field_name: field_employer_url
+entity_type: node
+bundle: job_posting
+label: 'Employer URL'
+description: 'The website URL of the employer.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

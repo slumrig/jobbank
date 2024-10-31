@@ -1,0 +1,19 @@
+uuid: a11c2c3e-7284-416e-9126-a35d0f562403
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_employment_type
+    - node.type.job_posting
+id: node.job_posting.field_employment_type
+field_name: field_employment_type
+entity_type: node
+bundle: job_posting
+label: 'Employment Type'
+description: 'The type of employment - Permanent/Temporary, Full or Part Time etc.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

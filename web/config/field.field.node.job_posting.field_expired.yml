@@ -1,0 +1,23 @@
+uuid: 88743cde-82ef-4ea5-86b6-a393c6601dbe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_expired
+    - node.type.job_posting
+id: node.job_posting.field_expired
+field_name: field_expired
+entity_type: node
+bundle: job_posting
+label: Expired
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Expired
+  off_label: Active
+field_type: boolean

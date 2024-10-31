@@ -1,0 +1,18 @@
+id: posting_migration
+label: 'Migrate job postings to site'
+source:
+  plugin: content_entity:node
+  bundle: job_posting
+  batch_size: 100
+process:
+  title: nid
+  nid: nid
+  field_raw:
+    plugin: get_raw_html
+    source: field_posting_url
+destination:
+  plugin: entity:node
+  default_bundle: job_posting
+  overwrite_properties:
+    - title
+    - field_raw

@@ -1,0 +1,6 @@
+services:
+  postings.commands:
+    class: Drupal\postings\Drush\Commands\PostingsCommands
+    tags:
+      - { name: drush.command }
+    arguments: ['@entity_type.manager', '@logger.factory', '@plugin.manager.migration']
