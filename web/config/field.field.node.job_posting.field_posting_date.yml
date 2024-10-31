@@ -11,7 +11,7 @@ entity_type: node
 bundle: job_posting
 label: 'Posting Date'
 description: 'The day and time of when the job posting was added to the job bank.'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

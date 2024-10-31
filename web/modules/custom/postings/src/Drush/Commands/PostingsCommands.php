@@ -33,7 +33,6 @@ final class PostingsCommands extends DrushCommands {
   private const POSTAL_CODE = "//span[@property='postalCode']";
   private const JOB_BANK_NO = "//span[@class='source-image']/following-sibling::span/following-sibling::span";
   private const NOC = "//span[@class='noc-no']";
-  private const WORK_SITE_INFO = "//span[@class='fa-icon-desc fa-icon fas fa-building']/following-sibling::span/following-sibling::span";
   private const LANGUAGE = "//p[@property='qualification']";
   private const EDUCATION = "//ul[@property='educationRequirements qualification']/li";
   private const EXPERIENCE = "//p[@property='experienceRequirements qualification']/span/following-sibling::span";
@@ -116,36 +115,41 @@ final class PostingsCommands extends DrushCommands {
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
     $ids = $node_storage->getQuery()
       ->condition('type', 'job_posting')
-      ->range(0, self::PAGES)
+      ->condition('status', '0')
+      ->condition('field_raw', NULL, 'IS NOT NULL')
       ->accessCheck()
       ->execute();
-    foreach($node_storage->loadMultiple($ids) as $posting) {
-      $body = $posting->get('field_raw')->getValue()[0]['value'];
-      $document = Html::load($body);
-      $dom_path = new DOMXpath($document);
-      $posting->set('title', $this->getValueByPath($dom_path, self::TITLE_PATH));
-      $posting->set('field_employer_address', $this->getAddress($dom_path));
-      [$employer_name, $employer_url] = $this->getEmployer($dom_path);
-      $posting->set('field_employer_name', $employer_name);
-      $posting->set('field_employer_url', $employer_url);
-      $posting->set('field_employment_type', $this->getEmploymentType($dom_path));
-      $posting->set('field_job_bank_number', $this->getJobBankNumber($dom_path));
-      $posting->set('field_job_description', $this->getJobDescription($dom_path));
-      $posting->set('field_lmia_status', $this->getLMIAStatus($dom_path));
-      $posting->set('field_location', $this->getValueByPath($dom_path, self::LOCATION));
-      $posting->set('field_noc', $this->getNoc($dom_path));
-      $posting->set('field_posting_date', $this->getPostedDate($dom_path));
-      $posting->set('field_rate_of_hours', $this->getValueByPath($dom_path, self::HOURS_PER_UNIT));
-      $posting->set('field_rate_of_pay', $this->getRate($dom_path));
-      $posting->set('field_vacancies', $this->getValueByPath($dom_path, self::VACANCIES));
-      $posting->setPublished(TRUE);
-      try {
-        $posting->save();
-        echo '.';
-      } catch (\Exception $e) {
-        $this->logger()?->error($e->getMessage());
-        echo '*';
+    foreach(array_chunk($ids, 50) as $ids) {
+      foreach($node_storage->loadMultiple($ids) as $posting) {
+        $body = $posting->get('field_raw')->getValue()[0]['value'];
+        $document = Html::load($body);
+        $dom_path = new DOMXpath($document);
+        $posting->set('title', $this->getValueByPath($dom_path, self::TITLE_PATH));
+        $posting->set('field_employer_address', $this->getAddress($dom_path));
+        [$employer_name, $employer_url] = $this->getEmployer($dom_path);
+        $posting->set('field_employer_name', $employer_name);
+        $posting->set('field_employer_url', $employer_url);
+        $posting->set('field_employment_type', $this->getEmploymentType($dom_path));
+        $posting->set('field_job_bank_number', $this->getJobBankNumber($dom_path));
+        $posting->set('field_job_description', $this->getJobDescription($dom_path));
+        $posting->set('field_lmia_status', $this->getLMIAStatus($dom_path));
+        $posting->set('field_location', $this->getValueByPath($dom_path, self::LOCATION));
+        $posting->set('field_noc', $this->getNoc($dom_path));
+        $posting->set('field_posting_date', $this->getPostedDate($dom_path));
+        $posting->set('field_rate_of_hours', $this->getValueByPath($dom_path, self::HOURS_PER_UNIT));
+        $posting->set('field_rate_of_pay', $this->getRate($dom_path));
+        $posting->set('field_vacancies', $this->getValueByPath($dom_path, self::VACANCIES));
+        $posting->setPublished(TRUE);
+        try {
+          $posting->save();
+          echo '.';
+        }
+        catch (\Exception $e) {
+          $this->logger()?->error($e->getMessage());
+          echo '*';
+        }
       }
+      echo PHP_EOL;
     }
   }
 
@@ -293,10 +297,10 @@ final class PostingsCommands extends DrushCommands {
   }
 
   private function getLMIAStatus(DOMXpath $dom_path): string {
-    $status = $this->getFieldsBypath($dom_path, "//span[@class='tfw-icon lmia-icon-pending']");
+    $status = $this->getFieldsBypath($dom_path,self::PENDING);
 
     if ($status->length === 0) {
-      $status = $this->getFieldsBypath($dom_path, "//span[@class='tfw-icon lmia-icon-approved']");
+      $status = $this->getFieldsBypath($dom_path,self::APPROVED);
       if ($status->length === 0) {
         return 'None';
       }

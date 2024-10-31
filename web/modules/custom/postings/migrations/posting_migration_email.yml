@@ -1,18 +1,20 @@
 id: posting_migration_email
 label: 'Migrate email to job posting'
 source:
-  plugin: posting_email_plugin
-  ids:
-    posting_id:
-      type: string
+  plugin: content_entity:node
+  bundle: job_posting
+  batch_size: 100
 process:
+  title: title
   nid: nid
-  field_employer_email: email
+  field_employer_email:
+    plugin: get_email
+    source: field_posting_url
+    condition:
+      plugin: not_empty
+      source: field_employer_email
 destination:
   plugin: entity:node
   default_bundle: job_posting
   overwrite_properties:
     - field_employer_email
-migration_dependencies:
-  required:
-    - posting_migration
